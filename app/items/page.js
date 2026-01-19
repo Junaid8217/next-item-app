@@ -1,10 +1,15 @@
 import Link from 'next/link';
 import ItemImage from '../components/ItemImage';
 
+// Force server-side dynamic rendering
+export const dynamic = "force-dynamic";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL; // Use Vercel env variable
+
 // Fetch items from API
 async function getItems() {
   try {
-    const res = await fetch('http://localhost:5000/items', {
+    const res = await fetch(`${API_URL}/items`, {
       cache: 'no-store', // Always fetch fresh data
     });
     
@@ -13,7 +18,7 @@ async function getItems() {
     }
     
     const data = await res.json();
-    return data.data || [];
+    return data.data || data || [];
   } catch (error) {
     console.error('Error fetching items:', error);
     return [];
@@ -109,7 +114,7 @@ export default async function ItemsPage() {
               ))}
             </div>
 
-            {/* Load More Section (for future enhancement) */}
+            {/* Load More Section */}
             <div className="text-center mt-12">
               <p className="text-gray-500 mb-4">
                 You&apos;ve seen all available items
