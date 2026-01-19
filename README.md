@@ -1,36 +1,307 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next Item App
 
-## Getting Started
+A modern, full-stack web application for managing items with authentication, built using Next.js 16 and Express.js. Features a responsive design, protected routes, and real-time toast notifications.
 
-First, run the development server:
+## 🚀 Project Overview
+
+Next Item App is a comprehensive item management system that demonstrates modern web development practices with Next.js App Router, Express.js backend, and cookie-based authentication. Users can browse items, view detailed information, and authenticated users can add new items to the catalog.
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Next.js 16** - React framework with App Router
+- **React 19** - UI library
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **React Hot Toast** - Lightweight toast notifications
+- **JavaScript** - No TypeScript for simplicity
+
+### Backend
+- **Express.js** - Node.js web framework
+- **CORS** - Cross-origin resource sharing
+- **Nodemon** - Development auto-restart
+- **In-memory storage** - Simple data persistence
+
+### Development Tools
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Git** - Version control
+
+## 📋 Prerequisites
+
+Before running this project, make sure you have:
+
+- **Node.js** (v18 or higher)
+- **npm** (v9 or higher)
+- **Git** (for cloning)
+
+## 🔧 Setup & Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd next-item-app
+```
+
+### 2. Install Frontend Dependencies
+
+```bash
+npm install
+```
+
+### 3. Install Backend Dependencies
+
+```bash
+cd backend
+npm install
+cd ..
+```
+
+## 🚀 Running the Application
+
+### Start the Express Backend
+
+```bash
+cd backend
+npm run dev
+```
+
+The backend server will start on `http://localhost:5000`
+
+**Available API Endpoints:**
+- `GET /items` - Get all items
+- `GET /items/:id` - Get single item
+- `POST /items` - Add new item
+- `GET /health` - Health check
+
+### Start the Next.js Frontend
+
+In a new terminal window:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The frontend will start on `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**Important:** Both servers must be running simultaneously for full functionality.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📍 Route Summary
 
-## Learn More
+### Public Routes
+- **`/`** - Landing page with 7 sections (Hero, Features, Categories, etc.)
+- **`/items`** - Browse all items in card layout
+- **`/items/[id]`** - View individual item details
+- **`/login`** - Authentication page
 
-To learn more about Next.js, take a look at the following resources:
+### Protected Routes
+- **`/add-item`** - Add new items (requires authentication)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Special Files
+- **`middleware.js`** - Route protection and authentication
+- **`not-found.js`** - Custom 404 pages
+- **`loading.js`** - Loading states
+- **`error.js`** - Error boundaries
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Implemented Features
 
-## Deploy on Vercel
+### 🎨 User Interface
+- **Responsive Design** - Works on mobile, tablet, and desktop
+- **Modern UI** - Clean Tailwind CSS styling
+- **Loading States** - Skeleton loaders and spinners
+- **Error Handling** - User-friendly error pages
+- **Toast Notifications** - Success/error feedback
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🔐 Authentication System
+- **Cookie-based Auth** - Secure session management
+- **Route Protection** - Middleware-based access control
+- **Login/Logout** - Complete authentication flow
+- **Auto-redirect** - Return to intended page after login
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 📱 Item Management
+- **Browse Items** - Card-based item listing
+- **Item Details** - Comprehensive item information
+- **Add Items** - Form-based item creation (protected)
+- **Image Support** - URL-based image handling with fallbacks
+- **API Integration** - Full CRUD operations
+
+### 🛡️ Security Features
+- **Input Validation** - Client and server-side validation
+- **CORS Protection** - Secure cross-origin requests
+- **Cookie Security** - HttpOnly and SameSite settings
+- **Error Boundaries** - Graceful error handling
+
+## 🔐 Authentication Explanation
+
+### How Authentication Works
+
+1. **Login Process:**
+   - User enters credentials on `/login`
+   - Frontend validates against hardcoded credentials
+   - On success, creates authentication cookie
+   - Redirects to intended page or `/items`
+
+2. **Cookie Management:**
+   - **Storage:** Browser cookies with 24-hour expiration
+   - **Format:** JSON object with user info and timestamp
+   - **Security:** SameSite=Lax, path=/ settings
+
+3. **Route Protection:**
+   - **Middleware:** `middleware.js` intercepts requests
+   - **Check:** Validates cookie existence and expiration
+   - **Action:** Allows access or redirects to login
+
+4. **Session Handling:**
+   - **Persistence:** Survives browser refresh
+   - **Expiration:** Auto-logout after 24 hours
+   - **Cleanup:** Removes invalid/expired cookies
+
+### Demo Credentials
+
+```
+Email: admin@example.com
+Password: 123456
+```
+
+### Protected Routes
+
+Routes requiring authentication:
+- `/add-item` - Add new items to catalog
+
+Public routes (no authentication required):
+- `/` - Home page
+- `/items` - Browse items
+- `/items/[id]` - Item details
+- `/login` - Authentication
+
+## 🗂️ Project Structure
+
+```
+next-item-app/
+├── app/                          # Next.js App Router
+│   ├── components/               # Reusable components
+│   │   ├── Navbar.js            # Navigation with auth state
+│   │   ├── Footer.js            # Site footer
+│   │   ├── ItemImage.js         # Image with fallback
+│   │   ├── ToastProvider.js     # Toast configuration
+│   │   └── AuthCheck.js         # Auth wrapper component
+│   ├── utils/                   # Utility functions
+│   │   └── auth.js              # Authentication helpers
+│   ├── items/                   # Items routes
+│   │   ├── page.js              # Items listing
+│   │   └── [id]/                # Dynamic item routes
+│   │       ├── page.js          # Item details
+│   │       ├── loading.js       # Loading state
+│   │       ├── error.js         # Error boundary
+│   │       └── not-found.js     # 404 page
+│   ├── add-item/                # Protected route
+│   │   └── page.js              # Add item form
+│   ├── login/                   # Authentication
+│   │   └── page.js              # Login form
+│   ├── layout.js                # Root layout
+│   ├── page.js                  # Home page
+│   └── globals.css              # Global styles
+├── backend/                     # Express.js API
+│   ├── server.js                # API server
+│   ├── package.json             # Backend dependencies
+│   └── README.md                # Backend documentation
+├── middleware.js                # Route protection
+├── package.json                 # Frontend dependencies
+└── README.md                    # This file
+```
+
+## 🎯 Key Features Breakdown
+
+### Landing Page (7 Sections)
+1. **Hero** - Main call-to-action with gradient background
+2. **Features** - Key application features with icons
+3. **Categories** - Popular item categories
+4. **How It Works** - 3-step process explanation
+5. **Popular Items** - Featured items showcase
+6. **Testimonials** - User reviews and ratings
+7. **Call to Action** - Final conversion section
+
+### Item Management
+- **Card Layout** - Responsive grid with hover effects
+- **Image Handling** - Automatic fallbacks for broken images
+- **Price Display** - Formatted currency display
+- **Detailed Views** - Comprehensive item information
+- **Form Validation** - Client-side input validation
+
+### User Experience
+- **Toast Notifications** - Real-time feedback
+- **Loading States** - Skeleton loaders and spinners
+- **Error Recovery** - Retry mechanisms and clear messaging
+- **Responsive Design** - Mobile-first approach
+- **Accessibility** - ARIA labels and semantic HTML
+
+## 🔄 Development Workflow
+
+### Making Changes
+
+1. **Frontend changes:** Edit files in `/app` directory
+2. **Backend changes:** Edit files in `/backend` directory
+3. **Both servers auto-reload** on file changes
+
+### Adding New Routes
+
+1. Create new directory in `/app`
+2. Add `page.js` for the route component
+3. Optional: Add `loading.js`, `error.js`, `not-found.js`
+4. Update navigation in `Navbar.js` if needed
+
+### Database Integration
+
+Currently uses in-memory storage. To add a database:
+
+1. Install database driver (e.g., `mongoose`, `pg`)
+2. Update `/backend/server.js` with database connection
+3. Replace in-memory `items` array with database queries
+4. Add environment variables for database configuration
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+```bash
+npm run build
+# Deploy to Vercel or similar platform
+```
+
+### Backend (Railway/Heroku)
+```bash
+cd backend
+# Deploy to Railway, Heroku, or similar platform
+```
+
+### Environment Variables
+```bash
+# Frontend
+NEXT_PUBLIC_API_URL=your-backend-url
+
+# Backend
+PORT=5000
+NODE_ENV=production
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Next.js Team** - For the amazing React framework
+- **Tailwind CSS** - For the utility-first CSS framework
+- **React Hot Toast** - For the lightweight toast notifications
+- **Unsplash** - For the placeholder images
+
+---
+
+**Built with ❤️ using Next.js 16 and Express.js**
