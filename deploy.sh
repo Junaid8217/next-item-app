@@ -29,20 +29,35 @@ npm run build
 
 if [ $? -eq 0 ]; then
     echo "✅ Build successful"
+    
+    # Add and commit changes
+    echo "📦 Adding changes to git..."
+    git add .
+    
+    echo "💾 Committing changes..."
+    git commit -m "Fix Suspense boundary issue for production deployment
+
+- Add export const dynamic = 'force-dynamic' to login page
+- Add proper window checks for browser-only code
+- Ensure proper SSR handling for useSearchParams
+- Fix Vercel deployment build errors"
+    
+    echo "🚀 Pushing to GitHub..."
+    git push origin main
+    
+    echo "✅ Code pushed successfully!"
 else
     echo "❌ Build failed. Please fix errors before deploying."
     exit 1
 fi
 
 echo ""
-echo "📋 Deployment Checklist:"
-echo "========================"
-echo "1. [ ] Push code to GitHub"
-echo "2. [ ] Deploy backend to Railway"
-echo "3. [ ] Deploy frontend to Vercel"
-echo "4. [ ] Configure environment variables"
-echo "5. [ ] Test deployed application"
+echo "📋 Deployment Status:"
+echo "===================="
+echo "✅ Code pushed to GitHub"
+echo "🔄 Vercel will auto-deploy from GitHub"
+echo "🔄 Check Vercel dashboard for deployment status"
 echo ""
 echo "📖 See DEPLOYMENT.md for detailed instructions"
 echo ""
-echo "🎉 Ready for deployment!"
+echo "🎉 Deployment process completed!"

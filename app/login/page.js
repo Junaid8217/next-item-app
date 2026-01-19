@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { setAuthCookie, isAuthenticated } from '../utils/auth';
 import toast from 'react-hot-toast';
 
+// Force dynamic rendering to prevent prerendering issues
+export const dynamic = 'force-dynamic';
+
 function LoginForm() {
   const [formData, setFormData] = useState({
     email: '',
@@ -24,7 +27,7 @@ function LoginForm() {
 
   // Redirect if already authenticated
   useEffect(() => {
-    if (isAuthenticated()) {
+    if (typeof window !== 'undefined' && isAuthenticated()) {
       router.push(redirectUrl);
     }
   }, [router, redirectUrl]);
@@ -63,7 +66,9 @@ function LoginForm() {
         setAuthCookie(authData);
 
         // Dispatch custom event to update navbar
-        window.dispatchEvent(new Event('authChange'));
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new Event('authChange'));
+        }
 
         // Dismiss loading toast and show success
         toast.dismiss(loadingToast);
