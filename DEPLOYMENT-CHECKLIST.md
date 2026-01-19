@@ -14,27 +14,28 @@ Use this checklist to ensure successful deployment of your Next Item App.
 - [x] **FIXED: Import path errors resolved**
 - [x] **FIXED: Production build passes locally**
 
-## 🖥️ Backend Deployment (Railway)
+## 🖥️ Backend Deployment (Vercel)
 
-- [ ] Railway account created
-- [ ] GitHub connected to Railway
-- [ ] New project created from GitHub repo
-- [ ] Root directory set to `backend`
-- [ ] Environment variables added:
-  - [ ] `NODE_ENV=production`
-  - [ ] `PORT=5000`
-- [ ] Deployment successful
-- [ ] Health check endpoint working: `/health`
-- [ ] Backend URL saved for frontend configuration
+- [x] Vercel account created
+- [x] GitHub connected to Vercel
+- [x] New project created from GitHub repo
+- [x] Root directory set to `backend`
+- [x] Environment variables added:
+  - [x] `NODE_ENV=production`
+  - [x] `PORT=5000`
+- [x] Deployment successful
+- [x] Health check endpoint working: `/health`
+- [x] Backend URL: `https://backend-theta-mocha-24.vercel.app`
+- [x] CORS configured for production
 
-## 🌐 Frontend Deployment (Vercel)
+## 🌐 Frontend Deployment (Netlify)
 
-- [ ] Vercel account created
-- [ ] GitHub connected to Vercel
+- [ ] Netlify account created
+- [ ] GitHub connected to Netlify
 - [ ] New project imported from GitHub
-- [ ] Framework preset set to Next.js
+- [ ] Framework preset set to Next.js (auto-detected)
 - [ ] Environment variables added:
-  - [ ] `NEXT_PUBLIC_API_URL=your-railway-backend-url`
+  - [ ] `NEXT_PUBLIC_API_URL=https://backend-theta-mocha-24.vercel.app`
 - [ ] Deployment successful
 - [ ] Frontend URL accessible
 

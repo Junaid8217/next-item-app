@@ -265,28 +265,35 @@ Currently uses in-memory storage. To add a database:
 
 This project is ready for deployment on modern platforms:
 
-**Backend (Railway):**
-1. Connect GitHub repository to Railway
+**Backend (Vercel):**
+1. Connect GitHub repository to Vercel
 2. Set root directory to `backend`
 3. Add environment variables: `NODE_ENV=production`
 4. Deploy automatically
+5. **Current Backend URL:** `https://backend-theta-mocha-24.vercel.app`
 
-**Frontend (Vercel):**
-1. Connect GitHub repository to Vercel
-2. Set framework preset to Next.js
-3. Add environment variable: `NEXT_PUBLIC_API_URL=your-backend-url`
+**Frontend (Netlify):**
+1. Connect GitHub repository to Netlify
+2. Set framework preset to Next.js (auto-detected)
+3. Add environment variable: `NEXT_PUBLIC_API_URL=https://backend-theta-mocha-24.vercel.app`
 4. Deploy automatically
 
 ### Detailed Instructions
 
-For complete step-by-step deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
+For complete step-by-step deployment instructions:
+- **Netlify Frontend:** See [NETLIFY-DEPLOYMENT.md](NETLIFY-DEPLOYMENT.md)
+- **General Guide:** See [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ### Environment Variables
 
 **Frontend (.env.local):**
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:5000  # Local development
-# NEXT_PUBLIC_API_URL=https://your-backend.railway.app  # Production
+```
+
+**Frontend (.env.production):**
+```bash
+NEXT_PUBLIC_API_URL=https://backend-theta-mocha-24.vercel.app  # Production
 ```
 
 **Backend:**
@@ -297,13 +304,13 @@ PORT=5000
 
 ### Deployment Platforms
 
-**Recommended:**
-- **Frontend:** Vercel (optimized for Next.js)
-- **Backend:** Railway (simple Node.js deployment)
+**Current Setup:**
+- **Frontend:** Netlify (optimized for Next.js with SSG/SSR)
+- **Backend:** Vercel (serverless functions)
 
 **Alternatives:**
-- **Frontend:** Netlify, AWS Amplify
-- **Backend:** Heroku, DigitalOcean App Platform
+- **Frontend:** Vercel, AWS Amplify
+- **Backend:** Railway, Heroku, DigitalOcean App Platform
 
 ## 🤝 Contributing
 
