@@ -261,27 +261,49 @@ Currently uses in-memory storage. To add a database:
 
 ## 🚀 Deployment
 
-### Frontend (Vercel)
-```bash
-npm run build
-# Deploy to Vercel or similar platform
-```
+### Quick Deployment Guide
 
-### Backend (Railway/Heroku)
-```bash
-cd backend
-# Deploy to Railway, Heroku, or similar platform
-```
+This project is ready for deployment on modern platforms:
+
+**Backend (Railway):**
+1. Connect GitHub repository to Railway
+2. Set root directory to `backend`
+3. Add environment variables: `NODE_ENV=production`
+4. Deploy automatically
+
+**Frontend (Vercel):**
+1. Connect GitHub repository to Vercel
+2. Set framework preset to Next.js
+3. Add environment variable: `NEXT_PUBLIC_API_URL=your-backend-url`
+4. Deploy automatically
+
+### Detailed Instructions
+
+For complete step-by-step deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ### Environment Variables
-```bash
-# Frontend
-NEXT_PUBLIC_API_URL=your-backend-url
 
-# Backend
-PORT=5000
-NODE_ENV=production
+**Frontend (.env.local):**
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:5000  # Local development
+# NEXT_PUBLIC_API_URL=https://your-backend.railway.app  # Production
 ```
+
+**Backend:**
+```bash
+NODE_ENV=production
+PORT=5000
+```
+
+### Deployment Platforms
+
+**Recommended:**
+- **Frontend:** Vercel (optimized for Next.js)
+- **Backend:** Railway (simple Node.js deployment)
+
+**Alternatives:**
+- **Frontend:** Netlify, AWS Amplify
+- **Backend:** Heroku, DigitalOcean App Platform
 
 ## 🤝 Contributing
 

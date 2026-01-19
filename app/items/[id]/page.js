@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ItemImage from "../../../components/ItemImage";
+import ItemImage from "../../components/ItemImage";
 
 // Force dynamic server-side rendering
 export const dynamic = "force-dynamic";

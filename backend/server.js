@@ -5,7 +5,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-frontend-domain.vercel.app'] // Replace with your actual frontend URL
+    : ['http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
 // In-memory data store
@@ -147,7 +152,21 @@ app.get('/health', (req, res) => {
   res.json({
     success: true,
     message: 'Server is running',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Next Item App API',
+    version: '1.0.0',
+    endpoints: {
+      items: '/items',
+      health: '/health'
+    }
   });
 });
 
@@ -171,8 +190,9 @@ app.use((error, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📊 API endpoints:`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📡 API endpoints:`);
   console.log(`   GET    /items     - Get all items`);
   console.log(`   GET    /items/:id - Get single item`);
   console.log(`   POST   /items     - Add new item`);
