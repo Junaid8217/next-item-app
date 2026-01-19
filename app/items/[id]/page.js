@@ -27,7 +27,8 @@ async function getItem(id) {
 
 // Metadata for SEO
 export async function generateMetadata({ params }) {
-  const item = await getItem(params.id);
+  const resolvedParams = await params;
+  const item = await getItem(resolvedParams.id);
   if (!item) return { title: "Item Not Found", description: "Item not found." };
   return {
     title: `${item.name} - Next Item App`,
@@ -37,7 +38,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ItemDetailsPage({ params }) {
-  const item = await getItem(params.id);
+  const resolvedParams = await params;
+  const item = await getItem(resolvedParams.id);
 
   if (!item) notFound(); // 404 if no item
 

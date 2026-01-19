@@ -1,0 +1,24 @@
+[build]
+  publish = ".next"
+  command = "npm run build"
+
+[build.environment]
+  NEXT_PUBLIC_API_URL = "https://backend-theta-mocha-24.vercel.app"
+
+# Next.js specific configuration for Netlify
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  NEXT_PUBLIC_API_URL = "https://backend-theta-mocha-24.vercel.app"
+
+[context.deploy-preview.environment]
+  NEXT_PUBLIC_API_URL = "https://backend-theta-mocha-24.vercel.app"
+
+[context.branch-deploy.environment]
+  NEXT_PUBLIC_API_URL = "https://backend-theta-mocha-24.vercel.app"
