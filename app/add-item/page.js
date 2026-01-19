@@ -63,9 +63,8 @@ export default function AddItemPage() {
         image: formData.image.trim() || 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop'
       };
 
-      // Send to API
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/items`, {
+      // Send to API via Next.js API route (to avoid CORS issues)
+      const response = await fetch('/api/items', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,8 +72,13 @@ export default function AddItemPage() {
         body: JSON.stringify(itemData),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
       if (!response.ok) {
-        throw new Error('Failed to add item');
+        const errorText = await response.text();
+        console.error('API Error:', response.status, errorText);
+        throw new Error(`Failed to add item: ${response.status} ${errorText}`);
       }
 
       const result = await response.json();
